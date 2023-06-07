@@ -3,12 +3,6 @@ import {mapActions} from "vuex";
 
 export default {
     name: "HomePage",
-    methods:{
-        ...mapActions('authStore',{
-            getCsrfTokenAsync: 'getCsrfTokenAsync',
-            getCurrentUserAsync: 'getCurrentUserAsync',
-        })
-    }
 }
 </script>
 
@@ -16,5 +10,9 @@ export default {
 
 </style>
 <template>
-    <h1>sfdfsfdf</h1>
+    <v-card
+        :title="`Content `"
+        :subtitle="`Subtitle for Content `"
+        text="Lorem ipsum dolor sit amet consectetur, adipisicing elit.?"
+    ></v-card>
 </template>

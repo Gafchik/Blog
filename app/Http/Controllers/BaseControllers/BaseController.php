@@ -4,8 +4,6 @@ namespace App\Http\Controllers\BaseControllers;
 
 use App\Http\Classes\Structure\HttpStatus;
 use App\Http\Controllers\Controller;
-
-use Couchbase\BaseException;
 use Illuminate\Http\JsonResponse;
 
 class BaseController extends Controller

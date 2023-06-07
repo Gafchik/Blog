@@ -10,26 +10,32 @@ export default {
             show1: false,
             form: {
                 name: '',
-                surname: '',
-                patronymic: '',
                 email: '',
                 password: '',
                 password_confirmation: '',
-                phone: '+380',
             },
             rules: rules
         }
     },
 
     methods:{
-        ...mapActions('authStore',['registerAsync','getCurrentUserAsync']),
-        register(){
+        ...mapActions('authStore',{
+            getCsrfTokenAsync:'getCsrfTokenAsync',
+            registerAsync: 'registerAsync',
+            getCurrentUserAsync: 'getCurrentUserAsync'
+        }),
+        ...mapActions({
+            signIn:'auth/login'
+        }),
+
+        async register(){
             if (this.$refs.form.validate()) {
                 this.form.password_confirmation = this.form.password
-                this.registerAsync(this.form).then((response) => {
+                await this.getCsrfTokenAsync();
+                await this.registerAsync(this.form).then((response) => {
                     if (response.result) {
-                        this.$router.push({path: '/'});
                         this.getCurrentUserAsync();
+                        // this.$router.push({path: '/'});
                     } else {
 
                     }
@@ -41,11 +47,12 @@ export default {
 </script>
 
 <template>
-    <v-form ref="form">
-        <v-card class="m-1 p-1 my-1 " width="500px">
-            <v-card-title class="text-center justify-center py-6 gen-ft-style">
-                <span class="display-0">{{$t(`app.reg`) }}</span>
-            </v-card-title>
+    <v-card
+        min-width="75%"
+        :title="$t(`app.reg`)"
+        class="m-1 p-1 my-1"
+    >
+        <v-form ref="form">
             <v-card-text>
                 <v-text-field
                     :rules="[rules.required]"
@@ -55,22 +62,6 @@ export default {
                     clearable
                     :label="$t(`app.name`)"
                     v-model="form.name"/>
-                <v-text-field
-                    :rules="[rules.required]"
-                    maxlength="50"
-                    counter
-                    outlined
-                    clearable
-                    :label="$t(`app.surname`)"
-                    v-model="form.surname"/>
-                <v-text-field
-                    :rules="[rules.required]"
-                    maxlength="50"
-                    counter
-                    outlined
-                    clearable
-                    :label="$t(`app.patronymic`)"
-                    v-model="form.patronymic"/>
                 <v-text-field
                     :rules="[rules.required, rules.email]"
                     maxlength="50"
@@ -87,21 +78,13 @@ export default {
                     counter
                     :label="$t(`app.password`)"
                     v-model="form.password"/>
-                <v-text-field
-                    :rules="[rules.required]"
-                    outlined
-                    clearable
-                    counter
-                    maxlength="13"
-                    :label="$t(`app.phone`)"
-                    v-model="form.phone"/>
             </v-card-text>
             <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green" text @click="register">
-                    <span>{{$t(`app.reg`) }}</span>
+                <v-btn color="green" @click="register">
+                    <v-icon>done</v-icon>
                 </v-btn>
             </v-card-actions>
-        </v-card>
-    </v-form>
+        </v-form>
+    </v-card>
 </template>

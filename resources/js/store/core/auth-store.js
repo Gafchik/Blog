@@ -1,7 +1,6 @@
 import axios from "../../modules/axios_module";
 
 const state = {
-    isShowDrawer: false,
     currentUser :{
         email: null,
         name: null,
@@ -10,18 +9,12 @@ const state = {
 };
 
 const getters = {
-    isShowDrawer: state => {
-        return state.isShowDrawer
-    },
     currentUser: state => {
         return state.currentUser
     },
 };
 
 const mutations = {
-    setIsShowDrawer: (state, payload) => {
-        state.isShowDrawer = payload;
-    },
     setCurrentUser: (state, payload) => {
         state.currentUser = payload;
     },
@@ -29,12 +22,13 @@ const mutations = {
 
 const actions = {
     getCsrfTokenAsync: async () => {
-        return await axios.get('sanctum/csrf-cookie');
+        return await axios.get('/sanctum/csrf-cookie');
     },
 
     loginAsync: async ({commit}, payload) => {
         let resp;
-        return await axios.post('/login', payload)
+        // return await axios.post('/login', payload)
+        return await axios.get('/login', payload)
             .then(({data}) =>{
                 resp = {
                     result: true,
@@ -42,6 +36,7 @@ const actions = {
                 }
                 return resp
             }).catch(err =>{
+                console.error(err);
                 resp = {
                     result: false,
                     message: 'singIngError',
@@ -92,7 +87,7 @@ const actions = {
         }).catch(err => {
             localStorage.removeItem('x_xsrf_token');
         });
-    }
+    },
 };
 
 export default {

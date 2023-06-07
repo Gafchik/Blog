@@ -14,10 +14,11 @@ return [
     | and production domains which access your API via a frontend SPA.
     |
     */
+    'driver' => 'stateful',
 
     'stateful' => explode(',', env('SANCTUM_STATEFUL_DOMAINS', sprintf(
         '%s%s',
-        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1',
+        'localhost,localhost:3000,127.0.0.1,127.0.0.1:8000,::1,http://31.42.190.109:8082',
         Sanctum::currentApplicationUrlWithPort()
     ))),
 
