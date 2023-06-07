@@ -17,6 +17,4 @@ export default {
 </style>
 <template>
     <h1>sfdfsfdf</h1>
-    <v-btn @click="getCsrfTokenAsync()">test</v-btn>
-    <span>{{$t(`projectName`)}}</span>
 </template>

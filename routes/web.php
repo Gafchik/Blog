@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +20,8 @@ Route::get('/', function () {
 });
 Route::get('/{any}', function() {
     return view('welcome');
+});
+Route::controller(RegisterController::class)->group(function(){
+    Route::post('login', 'login');
+    Route::post('register', 'register');
 });
