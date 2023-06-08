@@ -4,7 +4,7 @@ const state = {
     currentUser :{
         email: null,
         name: null,
-        role: null
+        isLogin: false,
     }
 };
 
@@ -27,7 +27,7 @@ const actions = {
 
     loginAsync: async ({commit}, payload) => {
         let resp;
-        return await axios.get('/login', payload)
+        return await axios.post('/login', payload)
             .then(({data}) =>{
                 resp = {
                     result: true,
@@ -35,7 +35,6 @@ const actions = {
                 }
                 return resp
             }).catch(err =>{
-                console.error(err);
                 resp = {
                     result: false,
                     message: 'singIngError',
@@ -70,7 +69,7 @@ const actions = {
             commit('setCurrentUser', {
                 email: null,
                 name: null,
-                role: null
+                isLogin: false,
             });
         });
     },
@@ -80,11 +79,16 @@ const actions = {
             commit('setCurrentUser', {
                 email:data.data.email,
                 name:data.data.name,
-                role:data.data.role,
+                isLogin: true,
             });
             return data.data
         }).catch(err => {
             localStorage.removeItem('x_xsrf_token');
+            commit('setCurrentUser', {
+                email: null,
+                name: null,
+                isLogin: false,
+            });
         });
     },
 };

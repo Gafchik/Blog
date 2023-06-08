@@ -26,9 +26,13 @@ export default {
             if (this.$refs.form.validate()) {
                 this.loginAsync(this.form).then((response) => {
                     if (response.result) {
-                        this.getCurrentUserAsync();
+                    this.$router.push({ name: 'home'});
+                        this.getCurrentUserAsync().then(() =>{
+                            location.reload();
+                        });
                     } else {
                     }
+
                 })
             }
         }
