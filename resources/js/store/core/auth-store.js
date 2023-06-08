@@ -22,12 +22,11 @@ const mutations = {
 
 const actions = {
     getCsrfTokenAsync: async () => {
-        return await axios.get('/sanctum/csrf-cookie');
+        return await axios.get('sanctum/csrf-cookie');
     },
 
     loginAsync: async ({commit}, payload) => {
         let resp;
-        // return await axios.post('/login', payload)
         return await axios.get('/login', payload)
             .then(({data}) =>{
                 resp = {
@@ -76,7 +75,7 @@ const actions = {
         });
     },
     getCurrentUserAsync: async ({commit}) => {
-        await axios.post('api/user').then((data) => {
+        await axios.post('/api/user').then((data) => {
             localStorage.setItem('x_xsrf_token',data.config.headers['X-XSRF-TOKEN'])
             commit('setCurrentUser', {
                 email:data.data.email,

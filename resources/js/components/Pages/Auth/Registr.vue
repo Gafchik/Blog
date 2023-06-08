@@ -35,7 +35,7 @@ export default {
                 await this.registerAsync(this.form).then((response) => {
                     if (response.result) {
                         this.getCurrentUserAsync();
-                        // this.$router.push({path: '/'});
+                        this.$router.push({path: '/'});
                     } else {
 
                     }

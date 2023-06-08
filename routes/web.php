@@ -9,5 +9,11 @@ Route::get('/', function () {
 Route::get('/{any}', function() {
     return view('welcome');
 });
+Route::get('/register', function() {
+    return view('welcome');
+});
+Route::get('/login', function() {
+    return view('welcome');
+});
 Auth::routes();
 

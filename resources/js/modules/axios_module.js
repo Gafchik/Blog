@@ -1,10 +1,10 @@
 import axios from 'axios';
-
+const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'CSRF': document.querySelector('meta[name="csrf-token"]').content,
+    "X-CSRF-TOKEN": token,
+    "sdsdN": token
 };
 
 export default axios;

@@ -16,6 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')
     ->post('/user', function (Request $request) {
-        dd('+');
         return $request->user();
 });

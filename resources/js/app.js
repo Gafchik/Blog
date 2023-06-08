@@ -1,4 +1,5 @@
 import './bootstrap';
+import '../css/app.css';
 import 'vuetify/styles';
 import App from "./components/App.vue";
 import vuetify from './plugins/vuetify'
