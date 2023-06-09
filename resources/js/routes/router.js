@@ -16,7 +16,6 @@ const router = createRouter({
 })
 router.beforeEach((to,from,next) =>{
     const token = localStorage.getItem('x_xsrf_token');
-    console.log(token)
     if (to.name === 'login' || to.name === 'registry'){
         return token
             ? next({name: 'home'})

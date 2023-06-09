@@ -3,6 +3,8 @@ import axios from "../../modules/axios_module";
 const state = {
     publication: [],
     myPublication: [],
+    dialog: false,
+    editItem: {},
 };
 
 const getters = {
@@ -12,6 +14,12 @@ const getters = {
     myPublication: state => {
         return state.myPublication
     },
+    dialog: state => {
+        return state.dialog
+    },
+    editItem: state => {
+        return state.editItem
+    },
 };
 
 const mutations = {
@@ -20,6 +28,12 @@ const mutations = {
     },
     setMyPublication: (state, payload) => {
         state.myPublication = payload;
+    },
+    setDialog: (state, payload) => {
+        state.dialog = payload;
+    },
+    setEditItem: (state, payload) => {
+        state.editItem = payload;
     },
 };
 
@@ -51,6 +65,21 @@ const actions = {
 
             }).catch(err =>{
             })
+    },
+    editPublicationAsync: async ({commit}, payload) => {
+        return await axios.post('/publication/edit', payload)
+            .then(({data}) =>{
+
+            }).catch(err =>{
+            })
+    },
+    openDialog: async ({commit}, payload) => {
+        commit('setEditItem',payload)
+        commit('setDialog',true)
+    },
+    closeDialog: async ({commit}) => {
+        commit('setEditItem',{})
+        commit('setDialog',false)
     }
 };
 

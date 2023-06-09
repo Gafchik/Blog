@@ -7,6 +7,7 @@ use App\Http\Controllers\BaseControllers\WebController;
 use App\Http\Requests\Publication\{
     PublicationSendRequest,
     DeletePublicationRequest,
+    EditPublicationRequest,
 };
 
 class PublicationController extends WebController
@@ -23,6 +24,11 @@ class PublicationController extends WebController
     public function delete(DeletePublicationRequest $request)
     {
         $this->model->delete($request->getData());
+        return $this->makeGoodResponse([]);
+    }
+    public function edit(EditPublicationRequest $request)
+    {
+        $this->model->edit($request->getData());
         return $this->makeGoodResponse([]);
     }
 

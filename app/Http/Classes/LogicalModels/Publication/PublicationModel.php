@@ -22,6 +22,17 @@ class PublicationModel
             ->where('id',$data->id)
             ->delete();
     }
+
+    public function edit(PublicationDto $data): void
+    {
+        $this->publication
+            ->where('id',$data->id)
+            ->update([
+                'title' => $data->title,
+                'text' => $data->text,
+                'updated_at' => CDateTime::getCurrentDate(),
+            ]);
+    }
     public function send(PublicationDto $data): void
     {
         $user = UserInfoFacade::getUserInfo();

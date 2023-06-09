@@ -11,6 +11,7 @@ Route::group([
         Route::post('/send',  [PublicationController::class, 'send']);
         Route::post('/get-my',  [PublicationController::class, 'getMy']);
         Route::post('/delete',  [PublicationController::class, 'delete']);
+        Route::post('/edit',  [PublicationController::class, 'edit']);
     }
 );
 Route::group([

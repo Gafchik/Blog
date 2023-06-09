@@ -20,6 +20,11 @@ class Publication
         $this->model->delete($data);
     }
 
+    public function edit(PublicationDto $data): void
+    {
+        $this->model->edit($data);
+    }
+
     public function getAll(): array
     {
         return $this->model->getAll();

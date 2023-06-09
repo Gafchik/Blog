@@ -1,10 +1,12 @@
 <script>
 import rules from "../../../constants/field-validation-rules";
 import {mapActions, mapGetters} from "vuex";
+import EditDialogPublicProfile from "./components/EditDialogPublicProfile.vue";
 
 const trans_prefix = 'home_page';
 export default {
     name: "Profile",
+    components: {EditDialogPublicProfile},
     data() {
         return {
             rules,
@@ -32,6 +34,7 @@ export default {
             getPublicationAllAsync: 'getPublicationAllAsync',
             getPublicationMyAsync: 'getPublicationMyAsync',
             deletePublicationAsync: 'deletePublicationAsync',
+            openDialog: 'openDialog',
         }),
         send(){
             if (this.$refs.form.validate()) {
@@ -71,7 +74,7 @@ export default {
             })
         },
         editPublication(item){
-
+            this.openDialog(item)
         },
         getPublication(){
             this.getPublicationAllAsync();
@@ -115,6 +118,7 @@ export default {
                                     v-model="form.title"/>
                                 <v-textarea
                                     variant="filled"
+                                    :rules="[rules.required]"
                                     :label="$t(this.trans_prefix+`.new_massage.text_massage`)"
                                     auto-grow
                                     v-model="form.text"/>
@@ -152,10 +156,10 @@ export default {
                                 <td>{{ item.updated_at }}</td>
                                 <td>
                                     <v-row>
-                                        <v-btn color="blue" text @click="editPublication(item)">
+                                        <v-btn variant="text" color="blue" @click="editPublication(item)">
                                             <v-icon>edit</v-icon>
                                         </v-btn>
-                                        <v-btn color="red" text @click="deletePublication(item)">
+                                        <v-btn variant="text" color="red" @click="deletePublication(item)">
                                             <v-icon>delete</v-icon>
                                         </v-btn>
                                     </v-row>
@@ -163,8 +167,10 @@ export default {
                             </tr>
                             </tbody>
                         </v-table>
+                        <EditDialogPublicProfile/>
                     </v-expansion-panel-text>
                 </v-expansion-panel>
             </v-expansion-panels>
+            <edit-dialog-public-profile></edit-dialog-public-profile>
         </v-card>
 </template>
