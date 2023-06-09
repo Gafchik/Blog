@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Http\Classes\Core\UserInfo\UserInfo;
+use App\Http\Classes\Core\UserInfo\UserInfoInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        //        api auth
+        $this->app->singleton(UserInfoInterface::class, UserInfo::class);
+        $this->app->singleton('user_info_facade', UserInfoInterface::class);
     }
 
     /**

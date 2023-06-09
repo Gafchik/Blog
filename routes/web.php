@@ -21,4 +21,5 @@ Route::get('/home', function() {
 Auth::routes();
 
 include 'Profile/profile.php';
+include 'Publication/publication.php';
 

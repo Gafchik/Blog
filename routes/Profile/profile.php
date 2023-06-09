@@ -7,6 +7,5 @@ Route::group(['middleware' => ['auth:sanctum']],
         Route::get('/profile', function() {
             return view('welcome');
         });
-//        Route::post('/get-users',  [UserManagementController::class, 'getAllUsers']);
     }
 );
